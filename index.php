@@ -110,6 +110,7 @@ body {
 				</select></td>
 				<td><select data-column="8" class="search-input-select">
 						<option value="">Todos</option>
+
 				</select></td>
 			</tr>
 
