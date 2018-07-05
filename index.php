@@ -39,16 +39,6 @@
 			} );
 		</script>
 <style>
-div.container {
-	margin: 0 auto;
-	max-width: 760px;
-}
-
-div.header {
-	margin: 100px auto;
-	line-height: 30px;
-	max-width: 760px;
-}
 
 body {
 	background: #f7f7f7;
@@ -59,10 +49,9 @@ body {
 </style>
 </head>
 <body>
-	<!-- 	<div class="header"> -->
+
 	<h1>Visor de Bitácora de TodoAlojamiento</h1>
-	<!-- 	</div> -->
-	<!-- 	<div class="container"> -->
+
 	<table id="employee-grid" cellpadding="0" cellspacing="0" border="0"
 		class="display" width="100%">
 		<thead>
@@ -117,6 +106,6 @@ body {
 
 		</thead>
 	</table>
-	<!-- 	</div> -->
+
 </body>
 </html>
