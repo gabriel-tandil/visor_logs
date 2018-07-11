@@ -92,15 +92,13 @@ body {
 
 				<td><input type="text" data-column="5" class="search-input-text"></td>
 				<td><select data-column="6" class="search-input-select">
-						<option value="">Todos</option>
 							<?php include 'combo-clase.php'; ?>
 					</select></td>
 				<td><select data-column="7" class="search-input-select">
-						<option value="">Todos</option>
+							<?php include 'combo-metodo.php'; ?>
 				</select></td>
 				<td><select data-column="8" class="search-input-select">
-						<option value="">Todos</option>
-
+							<?php include 'combo-operacion.php'; ?>
 				</select></td>
 			</tr>
 

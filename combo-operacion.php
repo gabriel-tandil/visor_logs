@@ -9,9 +9,9 @@ $conn = mysqli_connect($array_ini['bdd']['servername'], $array_ini['bdd']['usern
 
 
 // getting total number records without any search
-$sql = "SELECT distinct clase ";
+$sql = "SELECT distinct operacion ";
 $sql.=" FROM log_procesos";
-$query=mysqli_query($conn, $sql) or die("combo-clase.php: obtener valores");
+$query=mysqli_query($conn, $sql) or die("combo-operacion.php: obtener valores");
 
 echo '<option value="">Todos</option>';
 $data = array();
