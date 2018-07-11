@@ -8,21 +8,22 @@
 	src="js/jquery.dataTables.js"></script>
 <script type="text/javascript" language="javascript">
 			$(document).ready(function() {
-				var dataTable = $('#employee-grid').DataTable( {
+				var dataTable = $('#log-grid').DataTable( {
 					"processing": true,
 					"serverSide": true,
+					"order": [[ 0, "desc" ]], // orden inicial por id descendente
 					"ajax":{
-						url :"employee-grid-data.php", // json datasource
+						url :"log-grid-data.php", // json datasource
 						type: "post",  // method  , by default get
 						error: function(){  // error handling
-							$(".employee-grid-error").html("");
-							$("#employee-grid").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
-							$("#employee-grid_processing").css("display","none");
+							$(".log-grid-error").html("");
+							$("#log-grid").append('<tbody class="log-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
+							$("#log-grid_processing").css("display","none");
 							
 						}
 					}
 				} );
-				$("#employee-grid_filter").css("display","none");  // hiding global search box
+				$("#log-grid_filter").css("display","none");  // hiding global search box
 				$('.search-input-text').on( 'keyup click', function () {   // for text boxes
 					var i =$(this).attr('data-column');  // getting column index
 					var v =$(this).val();  // getting search input value
@@ -52,7 +53,7 @@ body {
 
 	<h1>Visor de Bitácora de TodoAlojamiento</h1>
 
-	<table id="employee-grid" cellpadding="0" cellspacing="0" border="0"
+	<table id="log-grid" cellpadding="0" cellspacing="0" border="0"
 		class="display" width="100%">
 		<thead>
 			<tr>
