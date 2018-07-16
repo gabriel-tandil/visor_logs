@@ -7,28 +7,62 @@
 
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
 <script type="text/javascript" language="javascript">
+
+function eventoCombo(combo,columna,tabla) {
+	
+}
 			$(document).ready(function() {
 
 			    // Setup - add a text input to each footer cell
 			    $('#log-grid thead tr').clone(true).appendTo( '#log-grid thead' );
 			    $('#log-grid thead tr:eq(1) th').each( function (i) {
 			        var title = $(this).text();
+			        if (i==3 || i==4||i==6||i==7||i==8){//todos los que son combo
+			        
 					if (i==3){
-						$(this).html( '<select  placeholder="Tipo" >'
-												+'<option value="">Todos</option> '
-												+'<option value="general">General</option> '
-												+'<option value="channel">Channel</option> '
+						$(this).html( '<select>'
+												+'<option value="">Todos</option>'
+												+'<option value="general">General</option>'
+												+'<option value="channel">Channel</option>'
 												+'</select>');
-												$( 'select', this ).on( ' change', function () {
-										            
-										            	dataTable
-										                    .column(i)
-										                    .search( $(this).val() )
-										                    .draw();
-										            
-										        } );
+					
+
+					}else if (i==4){
+						$(this).html( '<select>'
+								+'<option value="">Todos</option>'
+								+'<option value="texto-libre">texto-libre</option>'
+								+'<option value="xml-enviado">xml-enviado</option>'
+								+'<option value="xml-recibido">xml-recibido</option>'
+								+'</select>');
+						
+					}else if (i==6){
+						$(this).html( '<select>'
+								<?php include 'combo-clase.php'; ?>
+								+'</select>');
+						
+					}else if (i==7){
+						$(this).html( '<select>'
+								<?php include 'combo-metodo.php'; ?>
+								+'</select>');
+						
+					}else if (i==8){
+						$(this).html( '<select>'
+								<?php include 'combo-operacion.php'; ?>
+								+'</select>');
+						
+					}
+					//evento de busqueda para los combos
+					$( 'select', this ).on( ' change', function () {
+				        
+						dataTable
+				            .column(i)
+				            .search( $(this).val() )
+				            .draw();
+				    
+				} );
+
 					}else{
-			        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+			        $(this).html( '<input type="text" placeholder="todos" size=10/>' );
 			 
 			        $( 'input', this ).on( 'keyup change', function () {
 			            if ( dataTable.column(i).search() !== this.value ) {
@@ -42,10 +76,16 @@
 			    } );
 				
 				var dataTable = $('#log-grid').DataTable( {
+					
+					"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 					"processing": true,
 					"serverSide": true,
 			        orderCellsTop: true,
 			        fixedHeader: true,
+			        dom: 'Bfrtip',
+			        buttons: [
+			            'colvis', 'pageLength' ,'csv'
+			        ],			        
 					"order": [[ 0, "desc" ]], // orden inicial por id descendente
 					"ajax":{
 						url :"log-grid-data.php", // json datasource
@@ -95,41 +135,7 @@ body {
 				<th>Operanción</th>
 			</tr>
 		</thead>
-		<!-- 		<thead> -->
-		<!-- 			<tr> -->
-		<!-- 				<td><input type="text" data-column="0" class="search-input-text" -->
-		<!-- 					size="10"></td> -->
-		<!-- 				<td><input type="text" data-column="1" class="search-input-text" -->
-		<!-- 					size="10"></td> -->
-		<!-- 				<td><input type="text" data-column="2" class="search-input-text" -->
-		<!-- 					size="20"></td> -->
-		<!-- 				<td><select data-column="3" class="search-input-select"> -->
-		<!-- 						<option value="">Todos</option> -->
-		<!-- 						<option value="general">General</option> -->
-		<!-- 						<option value="channel">Channel</option> -->
-		<!-- 				</select></td> -->
-		<!-- 				<td><select data-column="4" class="search-input-select"> -->
-		<!-- 						<option value="">Todos</option> -->
-		<!-- 						<option value="texto-libre">texto-libre</option> -->
-		<!-- 						<option value="xml-enviado">xml-enviado</option> -->
-		<!-- 						<option value="xml-recibido">xml-recibido</option> -->
-		<!-- 				</select></td> -->
-
-
-		<!-- 				<td><input type="text" data-column="5" class="search-input-text"></td> -->
-		<!-- 				<td><select data-column="6" class="search-input-select"> -->
-		<!-- 						?php include 'combo-clase.php'; ?>-->
-		<!-- 					</select></td> -->
-		<!-- 				<td><select data-column="7" class="search-input-select"> -->
-		<!-- 						?php include 'combo-metodo.php'; ?>-->
-		<!-- 				</select></td> -->
-		<!-- 				<td><select data-column="8" class="search-input-select"> -->
-		<!-- 						?php include 'combo-operacion.php'; ?>-->
-		<!-- 				</select></td> -->
-		<!-- 			</tr> -->
-
-
-		<!-- 		</thead> -->
+		
 	</table>
 
 </body>
