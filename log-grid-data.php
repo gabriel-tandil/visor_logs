@@ -77,7 +77,7 @@ if (! empty($requestData['columns'][1]['search']['value']) || ! empty($requestDa
     $fila = mysqli_fetch_row($query);
     $totalFiltered = $fila[0];
 }
-$sql .= " ORDER BY " . $columns[$requestData['order'][0]['column']] . "   " . $requestData['order'][0]['dir'] . "   LIMIT " . $requestData['start'] . " ," . $requestData['length'] . "   "; // adding length
+$sql .= " ORDER BY " . $columns[$requestData['order'][0]['column']] . "   " . $requestData['order'][0]['dir'] . "   LIMIT " . $requestData['start'] . " ," . $requestData['length'] . "   "; 
 
 $query = mysqli_query($conn, "SELECT 
     idLogProcesos,

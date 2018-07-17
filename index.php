@@ -19,7 +19,8 @@ tr.shown td.details-control {
 /* } */
 </style>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
-<script type="text/javascript" language="javascript">
+
+<script type="text/javascript">
 var dataTable=null;
 function format ( rowData ) {
 	var div = $('<div/>')
@@ -30,7 +31,7 @@ function format ( rowData ) {
 		url: 'detalles.php',
 		data: {
 			idLogProcesos: rowData.idLogProcesos,
-			formatear: rowData.tipoDato,
+			tipoDato: rowData.tipoDato,
 		},
 		dataType: 'json',
 		type: 'post',
@@ -111,14 +112,18 @@ function format ( rowData ) {
 				
 				dataTable = $('#log-grid').DataTable( {
 					
-					"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+					"lengthMenu": [[10, 25, 50, 100, 500, 1000], [10, 25, 50, 100, '500 (Puede que sea demasiado)', '1000 (Puede que sea demasiado)']],
 					"processing": true,
 					"serverSide": true,
 			        orderCellsTop: true,
 			        fixedHeader: true,
 			        dom: 'Bfrtip',
 			        buttons: [
-			            'colvis', 'pageLength' ,'csv'
+			        	{
+			                extend: 'colvis',
+			                columns: ':gt(0)'
+			            },
+			             'pageLength' ,'csv'
 			        ],			        
 					"order": [[ 1, "desc" ]], // orden inicial por id descendente
 					"ajax":{
@@ -138,10 +143,16 @@ function format ( rowData ) {
     		                "defaultContent": ""
     		            },
     		            { "data": 'idLogProcesos' },
-    		            { "data": 'idProceso'     },
+    		            { 
+        		           "data": 'idProceso' ,
+        		           "visible": false
+        		        },
     		            { "data": 'marcaTemporal'},
-    		            { "data": 'tipoProceso'   },
-    		            { "data": 'tipoDato'      },
+    		            {
+        		            "data": 'tipoProceso'  ,
+        		            "visible": false 
+        		        },
+    		            { "data": 'tipoDato'   },
     		            { "data": 'dato'          },
     		            { "data": 'clase'         },
     		            { "data": 'metodo'        },
