@@ -26,8 +26,13 @@ if ($requestData['tipoDato'] == 'xml-enviado' || $requestData['tipoDato'] == 'xm
     
     if ($dom->loadXML($dato)!=false)
         $dato = '<pre>' . htmlentities($dom->saveXML()) . '</pre>';
-    else 
-        $dato=htmlentities($dato);
+        else {
+            $jsonDato=json_decode($dato);
+            if ($jsonDato!=null)
+                $dato= '<pre>' .htmlentities(json_encode($jsonDato, JSON_PRETTY_PRINT)). '</pre>';
+            else
+                $dato=htmlentities($dato);
+        }
 }else{
     $dato=htmlentities($dato);
 }
