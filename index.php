@@ -4,7 +4,9 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="DataTables/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="custom-loader-css/dataTables.customLoader.walker.css">
 <style>
+
 td.details-control {
 	background: url('imagenes/details_open.png') no-repeat center center;
 	cursor: pointer;
@@ -14,9 +16,7 @@ tr.shown td.details-control {
 	background: url('imagenes/details_close.png') no-repeat center center;
 }
 
-/* tr.loading td { */
-/* 	text-align: center; */
-/* } */
+
 </style>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
 
@@ -112,9 +112,12 @@ function format ( rowData ) {
 				
 				dataTable = $('#log-grid').DataTable( {
 					
-					"lengthMenu": [[10, 25, 50, 100, 500, 1000], [10, 25, 50, 100, '500 (Puede que sea demasiado)', '1000 (Puede que sea demasiado)']],
+					"lengthMenu": [[10, 25, 50, 100, 500, 1000], [10, 25, 50, 100, '500 (mucho)', '1000 (demasiado)']],
 					"processing": true,
 					"serverSide": true,
+					"language": {
+						"processing": "<div></div><div></div><div></div><div></div><div></div>"
+					},
 			        orderCellsTop: true,
 			        fixedHeader: true,
 			        dom: 'Bfrtip',
