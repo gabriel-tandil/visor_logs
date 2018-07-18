@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css"
 	href="DataTables/datatables.min.css" />
 <link rel="stylesheet" type="text/css" href="custom-loader-css/dataTables.customLoader.walker.css">
+<link rel="shortcut icon" type="image/png" href="favicon.png"/>
 <style>
 
 td.details-control {
@@ -25,7 +26,7 @@ var dataTable=null;
 function format ( rowData ) {
 	var div = $('<div/>')
 		.addClass( 'loading' )
-		.text( 'Loading...' );
+		.text( 'Cargando...' );
 
 	$.ajax( {
 		url: 'detalles.php',
