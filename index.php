@@ -115,7 +115,7 @@ function format ( rowData ) {
 					"serverSide": true,
 					"language": {
 						"processing": "<div></div><div></div><div></div><div></div><div></div>",
-						"info": "Registros: _START_ .. _END_"						
+						"info": "Registros: _START_ .. _END_ / Página: _PAGE_"						
 					},
 			        orderCellsTop: true,
 			        fixedHeader: true,
