@@ -4,10 +4,10 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="DataTables/datatables.min.css" />
-<link rel="stylesheet" type="text/css" href="custom-loader-css/dataTables.customLoader.walker.css">
-<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+<link rel="stylesheet" type="text/css"
+	href="custom-loader-css/dataTables.customLoader.walker.css">
+<link rel="shortcut icon" type="image/png" href="favicon.png" />
 <style>
-
 td.details-control {
 	background: url('imagenes/details_open.png') no-repeat center center;
 	cursor: pointer;
@@ -16,13 +16,11 @@ td.details-control {
 tr.shown td.details-control {
 	background: url('imagenes/details_close.png') no-repeat center center;
 }
-
-
 </style>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
 
 <script type="text/javascript">
-var dataTable=null;
+
 function format ( rowData ) {
 	var div = $('<div/>')
 		.addClass( 'loading' )
@@ -45,7 +43,6 @@ function format ( rowData ) {
 
 	return div;
 }
-
 
 			$(document).ready(function() {
 
@@ -117,13 +114,14 @@ function format ( rowData ) {
 					"processing": true,
 					"serverSide": true,
 					"language": {
-						"processing": "<div></div><div></div><div></div><div></div><div></div>"
+						"processing": "<div></div><div></div><div></div><div></div><div></div>",
+						"info": "Registros: _START_ .. _END_"						
 					},
 			        orderCellsTop: true,
 			        fixedHeader: true,
-			        "sDom": '<"top"Bp>rt<"bottom"ip>',
-			        
-			        dom: 'Bfrtip',
+			        "dom": '<"top"Bpi>t<"bottom"pi>',
+			        "pagingType": "simple",
+
 			        buttons: [
 			        	{
 			                extend: 'colvis',
@@ -165,7 +163,8 @@ function format ( rowData ) {
     		            { "data": 'operancion'    }
     		            ],
 					});
-				
+
+
 				$("#log-grid_filter").css("display","none");
 				// Add event listener for opening and closing details
 				$('#log-grid tbody').on('click', 'td.details-control', function () {
