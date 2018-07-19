@@ -112,7 +112,7 @@ function format ( rowData ) {
 			    } );
 				
 				dataTable = $('#log-grid').DataTable( {
-					
+					"pageLength": 50,
 					"lengthMenu": [[10, 25, 50, 100, 500, 1000], [10, 25, 50, 100, '500 (mucho)', '1000 (demasiado)']],
 					"processing": true,
 					"serverSide": true,
@@ -121,6 +121,8 @@ function format ( rowData ) {
 					},
 			        orderCellsTop: true,
 			        fixedHeader: true,
+			        "sDom": '<"top"Bp>rt<"bottom"ip>',
+			        
 			        dom: 'Bfrtip',
 			        buttons: [
 			        	{
@@ -164,7 +166,7 @@ function format ( rowData ) {
     		            ],
 					});
 				
-
+				$("#log-grid_filter").css("display","none");
 				// Add event listener for opening and closing details
 				$('#log-grid tbody').on('click', 'td.details-control', function () {
 					var tr = $(this).closest('tr');
