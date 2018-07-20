@@ -19,26 +19,20 @@ mysqli_stmt_bind_result($stmt, $dato);
 
 mysqli_stmt_fetch($stmt);
 
-if ($requestData['tipoDato'] == 'xml-enviado' || $requestData['tipoDato'] == 'xml-recibido') {
-    $dom = $dom = new DOMDocument();
-    $dom->formatOutput = true;
-    $dom->preserveWhiteSpace = false;
-    
-    if ($dom->loadXML($dato)!=false)
-        $dato = '<pre>' . htmlentities($dom->saveXML()) . '</pre>';
-        else {
-            $jsonDato=json_decode($dato);
-            if ($jsonDato!=null)
-                $dato= '<pre>' .htmlentities(json_encode($jsonDato, JSON_PRETTY_PRINT)). '</pre>';
-            else
-                $dato=htmlentities($dato);
-        }
-}else{
-    $dato=htmlentities($dato);
+$dom = $dom = new DOMDocument();
+$dom->formatOutput = true;
+$dom->preserveWhiteSpace = false;
+
+if ($dom->loadXML($dato) != false)
+    $dato = $dom->saveXML();
+else {
+    $jsonDato = json_decode($dato);
+    if ($jsonDato != null)
+        $dato = json_encode($jsonDato, JSON_PRETTY_PRINT);
 }
 
 $json_data = [
-    'html' => $dato
+    'html' => '<pre>' . htmlentities(mb_convert_encoding($dato, 'UTF-8', 'ASCII'), ENT_SUBSTITUTE, "UTF-8") . '</pre>'
 ];
 
 echo json_encode($json_data); // send data as json format

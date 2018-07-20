@@ -12,74 +12,21 @@ $requestData = $_REQUEST;
 $columns = array(
     // datatable column index => database column name
     
-    0 =>'idFila', 
     1 =>  'idLogProcesos',
-    2 =>  'idProceso',    
-    3 =>  'marcaTemporal',
-    4 =>  'tipoProceso',  
-    5 =>  'tipoDato',     
-    6 =>  'dato',         
-    7 =>  'clase',        
-    8 =>  'metodo',       
-    9 =>  'operancion'    
+    2 =>  'nivel',
+    3 =>  'tablaIdProceso',
+    4 =>  'idProceso',    
+    5 =>  'marcaTemporal',
+    6 =>  'tipoProceso',  
+    7 =>  'tipoDato',     
+    8 =>  'dato',         
+    9 =>  'clase',        
+    10 =>  'metodo',       
+    11 =>  'operancion',
+    12 =>  'estado'   
 );
 
-// // getting total number records without any search
-// $sql = "SELECT count(*) ";
-// $sql .= " FROM log_procesos";
-// $query = mysqli_query($conn, $sql) or die("employee-grid-data.php: get log_procesos");
-// $fila = mysqli_fetch_row($query);
-// $totalData = $fila[0];
-
-
-$sql = " FROM log_procesos WHERE 1 = 1";
-
-if (! empty($requestData['columns'][1]['search']['value']) || ! empty($requestData['columns'][1]['search']['value']) || ! empty($requestData['columns'][2]['search']['value']) || ! empty($requestData['columns'][3]['search']['value']) || ! empty($requestData['columns'][4]['search']['value']) || ! empty($requestData['columns'][5]['search']['value']) || ! empty($requestData['columns'][6]['search']['value']) || ! empty($requestData['columns'][7]['search']['value']) || ! empty($requestData['columns'][8]['search']['value'])) {
-    // getting records as per search parameters
-    if (! empty($requestData['columns'][1]['search']['value'])) { // idLogProcesos
-        $sql .= " AND idLogProcesos = " . $requestData['columns'][1]['search']['value'];
-    }
-    if (! empty($requestData['columns'][2]['search']['value'])) { // idProceso
-        $sql .= " AND idProceso = " . $requestData['columns'][2]['search']['value'];
-    }
-    if (! empty($requestData['columns'][4]['search']['value'])) { // tipoProceso
-        
-        $sql .= " AND ( tipoProceso = '" . $requestData['columns'][4]['search']['value'] . "' ) ";
-    }
-    if (! empty($requestData['columns'][5]['search']['value'])) { // tipoDato
-        $sql .= " AND ( tipoDato = '" . $requestData['columns'][5]['search']['value'] . "' ) ";
-    }
-    if (! empty($requestData['columns'][7]['search']['value'])) { // clase
-        if ($requestData['columns'][7]['search']['value'] == 'nulo')
-            $sql .= " AND ( clase is null ) ";
-        else
-            $sql .= " AND ( clase = '" . $requestData['columns'][7]['search']['value'] . "' ) ";
-    }
-    if (! empty($requestData['columns'][8]['search']['value'])) { // metodo
-        if ($requestData['columns'][8]['search']['value'] == 'nulo')
-            $sql .= " AND ( metodo is null ) ";
-        else
-            $sql .= " AND ( metodo = '" . $requestData['columns'][8]['search']['value'] . "' ) ";
-    }
-    if (! empty($requestData['columns'][9]['search']['value'])) { // operancion
-        if ($requestData['columns'][9]['search']['value'] == 'nulo')
-            $sql .= " AND ( operancion is null ) ";
-        else
-            $sql .= " AND ( operancion = '" . $requestData['columns'][9]['search']['value'] . "' ) ";
-    }
-    if (! empty($requestData['columns'][3]['search']['value'])) { // marcaTemporal
-        $sql .= " AND marcaTemporal like '" . $requestData['columns'][3]['search']['value'] . "%' ";
-    }
-    if (! empty($requestData['columns'][6]['search']['value'])) { // dato
-        $sql .= " AND dato LIKE '%" . $requestData['columns'][6]['search']['value'] . "%' ";
-    }
-//     $query = mysqli_query($conn, ' SELECT count(*) ' . $sql) or die("employee-grid-data.php: get log_procesos");
-//     $fila = mysqli_fetch_row($query);
-//     $totalFiltered = $fila[0];
-}
-$sql .= " ORDER BY " . $columns[$requestData['order'][0]['column']] . "   " . $requestData['order'][0]['dir'] . "   LIMIT " . $requestData['start'] . " ," . $requestData['length'] . "   "; 
-
-$query = mysqli_query($conn, "SELECT 
+$sql = "SELECT 
     idLogProcesos,
     idProceso,
     marcaTemporal,
@@ -88,7 +35,66 @@ $query = mysqli_query($conn, "SELECT
     substr(dato,1,250) as dato,
     clase,
     metodo,
-    operancion  " . $sql) or die("employee-grid-data.php: get log_procesos");
+    nivel,
+    tablaIdProceso,
+    estado,
+    operancion FROM log_procesos WHERE 1 = 1";
+
+if (! empty($requestData['columns'][1]['search']['value']) || ! empty($requestData['columns'][1]['search']['value']) || ! empty($requestData['columns'][2]['search']['value']) || ! empty($requestData['columns'][3]['search']['value']) || ! empty($requestData['columns'][4]['search']['value']) || ! empty($requestData['columns'][5]['search']['value']) || ! empty($requestData['columns'][6]['search']['value']) || ! empty($requestData['columns'][7]['search']['value']) || ! empty($requestData['columns'][8]['search']['value'])) {
+    // getting records as per search parameters
+    if (! empty($requestData['columns'][1]['search']['value'])) { // idLogProcesos
+        $sql .= " AND idLogProcesos = " . $requestData['columns'][1]['search']['value'];
+    }
+    if (! empty($requestData['columns'][2]['search']['value'])) { // nivel
+        $sql .= " AND ( nivel = '" . $requestData['columns'][2]['search']['value'] . "' ) ";
+    }
+    if (! empty($requestData['columns'][3]['search']['value'])) { // tablaIdProceso
+        if ($requestData['columns'][3]['search']['value'] == 'nulo')
+            $sql .= " AND ( tablaIdProceso is null ) ";
+            else
+                $sql .= " AND ( tablaIdProceso = '" . $requestData['columns'][3]['search']['value'] . "' ) ";
+    }
+    if (! empty($requestData['columns'][4]['search']['value'])) { // idProceso
+        $sql .= " AND idProceso = " . $requestData['columns'][2]['search']['value'];
+    }
+    if (! empty($requestData['columns'][5]['search']['value'])) { // marcaTemporal
+        $sql .= " AND marcaTemporal like '" . $requestData['columns'][5]['search']['value'] . "%' ";
+    }
+    if (! empty($requestData['columns'][6]['search']['value'])) { // tipoProceso
+        $sql .= " AND ( tipoProceso = '" . $requestData['columns'][6]['search']['value'] . "' ) ";
+    }
+    if (! empty($requestData['columns'][7]['search']['value'])) { // tipoDato
+        $sql .= " AND ( tipoDato = '" . $requestData['columns'][7]['search']['value'] . "' ) ";
+    }
+    if (! empty($requestData['columns'][8]['search']['value'])) { // dato
+        $sql .= " AND dato LIKE '%" . $requestData['columns'][8]['search']['value'] . "%' ";
+    }
+    if (! empty($requestData['columns'][9]['search']['value'])) { // clase
+        if ($requestData['columns'][9]['search']['value'] == 'nulo')
+            $sql .= " AND ( clase is null ) ";
+        else
+            $sql .= " AND ( clase = '" . $requestData['columns'][9]['search']['value'] . "' ) ";
+    }
+    if (! empty($requestData['columns'][10]['search']['value'])) { // metodo
+        if ($requestData['columns'][10]['search']['value'] == 'nulo')
+            $sql .= " AND ( metodo is null ) ";
+        else
+            $sql .= " AND ( metodo = '" . $requestData['columns'][10]['search']['value'] . "' ) ";
+    }
+    if (! empty($requestData['columns'][11]['search']['value'])) { // operancion
+        if ($requestData['columns'][11]['search']['value'] == 'nulo')
+            $sql .= " AND ( operancion is null ) ";
+        else
+            $sql .= " AND ( operancion = '" . $requestData['columns'][11]['search']['value'] . "' ) ";
+    }
+    if (! empty($requestData['columns'][12]['search']['value'])) { // estado
+        $sql .= " AND ( estado = '" . $requestData['columns'][12]['search']['value'] . "' ) ";
+    }
+
+}
+$sql .= " ORDER BY " . $columns[$requestData['order'][0]['column']] . "   " . $requestData['order'][0]['dir'] . "   LIMIT " . $requestData['start'] . " ," . $requestData['length'] . "   "; 
+
+$query = mysqli_query($conn, $sql) or die("employee-grid-data.php: get log_procesos");
 
 $data = array();
 $cuenta=0;
@@ -99,10 +105,15 @@ while ($row = mysqli_fetch_array($query)) { // preparing an array
     $nestedData['marcaTemporal'] = $row['marcaTemporal'];
     $nestedData['tipoProceso'] = $row['tipoProceso'];
     $nestedData['tipoDato'] = $row['tipoDato'];
-    $nestedData['dato'] = htmlentities($row['dato']);
+    //si se necesita mejorar la velocidad ver esto de aca
+    //quiza se pueda procesar en la base
+    $nestedData['dato'] =htmlentities(mb_convert_encoding($row['dato'], 'UTF-8', 'ASCII'), ENT_SUBSTITUTE, "UTF-8");
     $nestedData['clase'] = $row['clase'];
     $nestedData['metodo'] = $row['metodo'];
     $nestedData['operancion'] = $row['operancion'];
+    $nestedData['nivel'] = $row['nivel'];
+    $nestedData['tablaIdProceso'] = $row['tablaIdProceso'];
+    $nestedData['estado'] = $row['estado'];
     $data[] = $nestedData;
     $cuenta++;
 }
@@ -114,8 +125,8 @@ else
 
 $json_data = array(
     "draw" => intval($requestData['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw.
-    "recordsTotal" => $falsaCantRegistros, // total number of records
-    "recordsFiltered" => $falsaCantRegistros, // total number of records after searching, if there is no searching then totalFiltered = totalData
+    "recordsTotal" => $falsaCantRegistros, 
+    "recordsFiltered" => $falsaCantRegistros,
     "data" => $data // total data array
 );
 

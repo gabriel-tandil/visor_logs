@@ -50,39 +50,63 @@ function format ( rowData ) {
 			    $('#log-grid thead tr').clone(true).appendTo( '#log-grid thead' );
 			    $('#log-grid thead tr:eq(1) th').each( function (i) {
 			        var title = $(this).text();
-			        if (i==4 || i==5||i==7||i==8||i==9){//todos los que son combo
-			        
-					if (i==4){
-						$(this).html( '<select>'
+			        if (i==2 || i==3||i==6||i==7||i==9||i==10||i==11||i==12){//todos los que son combo
+
+			        	if (i==2){
+							$(this).html( '<select>'
+													+'<option value="">Todos</option>'
+													+'<option value="debug">Debug</option>'
+													+'<option value="error">Error</option>'
+													+'<option value="fatal">Fatal</option>'
+													+'<option value="info">Info</option>'
+													+'<option value="trace">Trace</option>'
+													+'<option value="warn">Warning</option>'
+													+'</select>');
+			        	}else if (i==3){//Tabla
+							$(this).html( '<select>'
+									<?php include 'combo-tabla.php'; ?>
+									+'</select>');
+						}else if (i==6){// tipo proceso
+							$(this).html( '<select>'
 												+'<option value="">Todos</option>'
 												+'<option value="general">General</option>'
 												+'<option value="channel">Channel</option>'
 												+'</select>');
 					
 
-					}else if (i==5){
+					}else if (i==7){
 						$(this).html( '<select>'
 								+'<option value="">Todos</option>'
 								+'<option value="texto-libre">texto-libre</option>'
 								+'<option value="xml-enviado">xml-enviado</option>'
 								+'<option value="xml-recibido">xml-recibido</option>'
-								+'</select>');
-						
-					}else if (i==7){
-						$(this).html( '<select>'
-								<?php include 'combo-clase.php'; ?>
-								+'</select>');
-						
-					}else if (i==8){
-						$(this).html( '<select>'
-								<?php include 'combo-metodo.php'; ?>
+								+'<option value="dato-enviado">dato-enviado</option>'
+								+'<option value="dato-recibido">dato-recibido</option>'
 								+'</select>');
 						
 					}else if (i==9){
 						$(this).html( '<select>'
-								<?php include 'combo-operacion.php'; ?>
+								<?php include 'combo-clase.php'; ?>
 								+'</select>');
 						
+					}else if (i==10){
+						$(this).html( '<select>'
+								<?php include 'combo-metodo.php'; ?>
+								+'</select>');
+						
+					}else if (i==11){
+						$(this).html( '<select>'
+								<?php include 'combo-operacion.php'; ?>
+								+'</select>');
+					}else if (i==12){//estado
+						$(this).html( '<select>'
+								+'<option value="">Todos</option>'
+								+'<option value="registrado">Registrado</option>'
+								+'<option value="visto">Visto</option>'
+								+'<option value="en_proceso">En Proceso</option>'
+								+'<option value="solucionado">Solucionado</option>'
+								+'<option value="con_bandera">Con Bandera</option>'
+								+'</select>');
 					}
 					//evento de busqueda para los combos
 					$( 'select', this ).on( ' change', function () {
@@ -147,6 +171,9 @@ function format ( rowData ) {
     		                "defaultContent": ""
     		            },
     		            { "data": 'idLogProcesos' },
+    		            { "data": 'nivel' },
+    		            { "data": 'tablaIdProceso',
+        		            "visible": false },    		            
     		            { 
         		           "data": 'idProceso' ,
         		           "visible": false
@@ -160,7 +187,9 @@ function format ( rowData ) {
     		            { "data": 'dato'          },
     		            { "data": 'clase'         },
     		            { "data": 'metodo'        },
-    		            { "data": 'operancion'    }
+    		            { "data": 'operancion'    },
+    		            { "data": 'estado' ,
+        		            "visible": false   }
     		            ],
 					});
 
@@ -204,6 +233,8 @@ body {
 			<tr>
 				<th></th>
 				<th>idLogProcesos</th>
+				<th>Nivel</th>
+				<th>Tabla Proceso</th>
 				<th>idProceso</th>
 				<th>Marca Temporal</th>
 				<th>Tipo de Proceso</th>
@@ -212,12 +243,15 @@ body {
 				<th>Clase</th>
 				<th>Método</th>
 				<th>Operanción</th>
+				<th>Estado</th>
 			</tr>
 		</thead>
 		<tfoot>
 			<tr>
 				<th></th>
 				<th>idLogProcesos</th>
+				<th>Nivel</th>
+				<th>Tabla Proceso</th>
 				<th>idProceso</th>
 				<th>Marca Temporal</th>
 				<th>Tipo de Proceso</th>
@@ -226,6 +260,7 @@ body {
 				<th>Clase</th>
 				<th>Método</th>
 				<th>Operanción</th>
+				<th>Estado</th>
 			</tr>
 		</tfoot>
 	</table>
