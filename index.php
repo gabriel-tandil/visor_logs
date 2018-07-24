@@ -151,7 +151,13 @@ function format ( rowData ) {
 			                extend: 'colvis',
 			                columns: ':gt(0)'
 			            },
-			             'pageLength' ,'csv'
+			             'pageLength' ,'csv',
+			             {
+			                 text: 'Volver a Filtrar',
+			                 action: function ( e, dt, node, config ) {
+			                     dt.ajax.reload();
+			                 }
+			             }
 			        ],			        
 					"order": [[ 1, "desc" ]], // orden inicial por id descendente
 					"ajax":{

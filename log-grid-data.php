@@ -66,7 +66,7 @@ if (! empty($requestData['columns'][1]['search']['value'])
             $sql .= " AND ( tablaIdProceso = '" . $requestData['columns'][3]['search']['value'] . "' ) ";
     }
     if (! empty($requestData['columns'][4]['search']['value'])) { // idProceso
-        $sql .= " AND idProceso = " . $requestData['columns'][2]['search']['value'];
+        $sql .= " AND idProceso = " . $requestData['columns'][4]['search']['value'];
     }
     if (! empty($requestData['columns'][5]['search']['value'])) { // marcaTemporal
         $sql .= " AND marcaTemporal like '" . $requestData['columns'][5]['search']['value'] . "%' ";
