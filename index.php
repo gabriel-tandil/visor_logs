@@ -71,6 +71,8 @@ function format ( rowData ) {
 												+'<option value="">Todos</option>'
 												+'<option value="general">General</option>'
 												+'<option value="channel">Channel</option>'
+												+'<option value="extranet">Extranet</option>'
+												+'<option value="portal">Portal</option>'
 												+'</select>');
 					
 
@@ -78,8 +80,6 @@ function format ( rowData ) {
 						$(this).html( '<select>'
 								+'<option value="">Todos</option>'
 								+'<option value="texto-libre">texto-libre</option>'
-								+'<option value="xml-enviado">xml-enviado</option>'
-								+'<option value="xml-recibido">xml-recibido</option>'
 								+'<option value="dato-enviado">dato-enviado</option>'
 								+'<option value="dato-recibido">dato-recibido</option>'
 								+'</select>');
@@ -134,7 +134,7 @@ function format ( rowData ) {
 				
 				dataTable = $('#log-grid').DataTable( {
 					"pageLength": 50,
-					"lengthMenu": [[10, 25, 50, 100, 500, 1000], [10, 25, 50, 100, '500 (mucho)', '1000 (demasiado)']],
+					"lengthMenu": [[1, 10, 25, 50, 100, 500, 1000], [1,10, 25, 50, 100, '500 (mucho)', '1000 (demasiado)']],
 					"processing": true,
 					"serverSide": true,
 					"language": {
