@@ -4,8 +4,8 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="DataTables/datatables.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="custom-loader-css/dataTables.customLoader.walker.css">
+<!-- <link rel="stylesheet" type="text/css" -->
+<!-- 	href="custom-loader-css/dataTables.customLoader.walker.css"> -->
 <link rel="shortcut icon" type="image/png" href="favicon.png" />
 <style>
 td.details-control {
@@ -113,8 +113,8 @@ function format ( rowData ) {
 				        
 						dataTable
 				            .column(i)
-				            .search( $(this).val() )
-				            .draw();
+				            .search( $(this).val() );
+				          //  .draw();
 				    
 				} );
 
@@ -125,8 +125,8 @@ function format ( rowData ) {
 			            if ( dataTable.column(i).search() !== this.value ) {
 			            	dataTable
 			                    .column(i)
-			                    .search( this.value )
-			                    .draw();
+			                    .search( this.value );
+// 			                    .draw();
 			            }
 			        } );
 					}
@@ -134,13 +134,15 @@ function format ( rowData ) {
 				
 				dataTable = $('#log-grid').DataTable( {
 					"pageLength": 50,
-					"lengthMenu": [[1, 10, 25, 50, 100, 500, 1000], [1,10, 25, 50, 100, '500 (mucho)', '1000 (demasiado)']],
-					"processing": true,
+					"lengthMenu": [[1,5, 10, 25, 50, 100, 500, 1000], [1,5,10, 25, 50, 100, '500 (mucho)', '1000 (demasiado)']],
 					"serverSide": true,
 					"language": {
-						"processing": "<div></div><div></div><div></div><div></div><div></div>",
+// 			            'LOADINGRECORDS': 'CARGANDO...',
+// 			            'PROCESSING': 'PROCESANDO...',
 						"info": "Registros: _START_ .. _END_ / Página: _PAGE_"						
 					},
+// 			        "processing": true,
+
 			        orderCellsTop: true,
 			        fixedHeader: true,
 			        "dom": '<"top"Bpi>t<"bottom"pi>',
@@ -153,9 +155,9 @@ function format ( rowData ) {
 			            },
 			             'pageLength' ,'csv',
 			             {
-			                 text: 'Volver a Filtrar',
+			                 text: '(Volver a) Filtrar',
 			                 action: function ( e, dt, node, config ) {
-			                     dt.ajax.reload();
+			                     dt.ajax.url("log-grid-data.php").load();
 			                 }
 			             }
 			        ],			        
@@ -197,6 +199,15 @@ function format ( rowData ) {
     		            { "data": 'estado' ,
         		            "visible": false   }
     		            ],
+    		            "fnPreDrawCallback": function() {
+    		            	// gather info to compose a message
+    		          	      $("#divCargando").show();
+    		            	return true;
+    		            	},
+    		            	"fnDrawCallback": function() {
+    		            	// in case your overlay needs to be put away automatically you can put it here
+    		            	    $("#divCargando").hide();
+    		            	}
 					});
 
 
@@ -230,7 +241,9 @@ body {
 </style>
 </head>
 <body>
-
+	<div id="divCargando"
+		style="display: none; text-align: center; position: fixed;  width: 600px; height: 100px; background-color: grey; top: 50%; left: 50%; z-index: 999; margin-top: -50px; margin-left: -300px;">
+		Cargando...</div>
 	<h1>Visor de Bitácora de TodoAlojamiento</h1>
 
 	<table id="log-grid" cellpadding="0" cellspacing="0" border="0"
