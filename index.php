@@ -20,6 +20,14 @@ td.details-control {
 tr.shown td.details-control {
 	background: url('imagenes/details_close.png') no-repeat center center;
 }
+
+body {
+	background: #f7f7f7;
+	color: #333;
+	font: 90%/1.45em "Helvetica Neue", HelveticaNeue, Verdana, Arial,
+		Helvetica, sans-serif;
+}
+
 </style>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
 <script src="Chosen/chosen.jquery.min.js" type="text/javascript"></script>
@@ -238,14 +246,7 @@ function format ( rowData ) {
 								
 			} );
 		</script>
-<style>
-body {
-	background: #f7f7f7;
-	color: #333;
-	font: 90%/1.45em "Helvetica Neue", HelveticaNeue, Verdana, Arial,
-		Helvetica, sans-serif;
-}
-</style>
+
 </head>
 <body>
 	<div id="divCargando"
