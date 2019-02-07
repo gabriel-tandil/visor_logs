@@ -4,9 +4,13 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="DataTables/datatables.min.css" />
-<!-- <link rel="stylesheet" type="text/css" -->
-<!-- 	href="custom-loader-css/dataTables.customLoader.walker.css"> -->
+
 <link rel="shortcut icon" type="image/png" href="favicon.png" />
+
+
+  <link rel="stylesheet" href="chosen.css">
+
+
 <style>
 td.details-control {
 	background: url('imagenes/details_open.png') no-repeat center center;
@@ -18,6 +22,12 @@ tr.shown td.details-control {
 }
 </style>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+<script src="chosen.jquery.js" type="text/javascript"></script>
+<!--   <script src="docsupport/jquery-3.2.1.min.js" type="text/javascript"></script> -->
+<!--   <script src="chosen.jquery.js" type="text/javascript"></script> -->
+
+
+
 
 <script type="text/javascript">
 
@@ -53,7 +63,7 @@ function format ( rowData ) {
 			        if (i==2 || i==3||i==6||i==7||i==9||i==10||i==11||i==12){//todos los que son combo
 
 			        	if (i==2){
-							$(this).html( '<select>'
+							$(this).html( '<select class="chosen-select">'
 													+'<option value="">Todos</option>'
 													+'<option value="debug">Debug</option>'
 													+'<option value="error">Error</option>'
@@ -63,11 +73,11 @@ function format ( rowData ) {
 													+'<option value="warn">Warning</option>'
 													+'</select>');
 			        	}else if (i==3){//Tabla
-							$(this).html( '<select>'
+							$(this).html( '<select class="chosen-select">'
 									<?php include 'combo-tabla.php'; ?>
 									+'</select>');
 						}else if (i==6){// tipo proceso
-							$(this).html( '<select>'
+							$(this).html( '<select class="chosen-select">'
 												+'<option value="">Todos</option>'
 												+'<option value="general">General</option>'
 												+'<option value="channel">Channel</option>'
@@ -77,7 +87,7 @@ function format ( rowData ) {
 					
 
 					}else if (i==7){
-						$(this).html( '<select>'
+						$(this).html( '<select class="chosen-select">'
 								+'<option value="">Todos</option>'
 								+'<option value="texto-libre">texto-libre</option>'
 								+'<option value="dato-enviado">dato-enviado</option>'
@@ -85,21 +95,21 @@ function format ( rowData ) {
 								+'</select>');
 						
 					}else if (i==9){
-						$(this).html( '<select>'
+						$(this).html( '<select class="chosen-select">'
 								<?php include 'combo-clase.php'; ?>
 								+'</select>');
 						
 					}else if (i==10){
-						$(this).html( '<select>'
+						$(this).html( '<select class="chosen-select">'
 								<?php include 'combo-metodo.php'; ?>
 								+'</select>');
 						
 					}else if (i==11){
-						$(this).html( '<select>'
+						$(this).html( '<select class="chosen-select">' 
 								<?php include 'combo-operacion.php'; ?>
 								+'</select>');
 					}else if (i==12){//estado
-						$(this).html( '<select>'
+						$(this).html( '<select class="chosen-select">'
 								+'<option value="">Todos</option>'
 								+'<option value="registrado">Registrado</option>'
 								+'<option value="visto">Visto</option>'
@@ -131,7 +141,7 @@ function format ( rowData ) {
 			        } );
 					}
 			    } );
-				
+			    $(".chosen-select").chosen();
 				dataTable = $('#log-grid').DataTable( {
 					"pageLength": 50,
 					"lengthMenu": [[1,5, 10, 25, 50, 100, 500, 1000], [1,5,10, 25, 50, 100, '500 (mucho)', '1000 (demasiado)']],
@@ -182,10 +192,7 @@ function format ( rowData ) {
     		            { "data": 'nivel' },
     		            { "data": 'tablaIdProceso',
         		            "visible": false },    		            
-    		            { 
-        		           "data": 'idProceso' ,
-        		           "visible": false
-        		        },
+    		            { "data": 'idProceso' },
     		            { "data": 'marcaTemporal'},
     		            {
         		            "data": 'tipoProceso'  ,
@@ -283,6 +290,5 @@ body {
 			</tr>
 		</tfoot>
 	</table>
-
 </body>
 </html>
