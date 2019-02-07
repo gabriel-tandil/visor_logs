@@ -8,7 +8,7 @@
 <link rel="shortcut icon" type="image/png" href="favicon.png" />
 
 
-  <link rel="stylesheet" href="chosen.css">
+  <link rel="stylesheet" href="Chosen/chosen.min.css">
 
 
 <style>
@@ -22,9 +22,8 @@ tr.shown td.details-control {
 }
 </style>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
-<script src="chosen.jquery.js" type="text/javascript"></script>
-<!--   <script src="docsupport/jquery-3.2.1.min.js" type="text/javascript"></script> -->
-<!--   <script src="chosen.jquery.js" type="text/javascript"></script> -->
+<script src="Chosen/chosen.jquery.min.js" type="text/javascript"></script>
+
 
 
 
@@ -188,7 +187,8 @@ function format ( rowData ) {
     		                "data":          null,
     		                "defaultContent": ""
     		            },
-    		            { "data": 'idLogProcesos' },
+    		            { "data": 'idLogProcesos' ,
+        		            "visible": false },
     		            { "data": 'nivel' },
     		            { "data": 'tablaIdProceso',
         		            "visible": false },    		            
