@@ -148,7 +148,11 @@ function format ( rowData ) {
 			        } );
 					}
 			    } );
-			    $(".chosen-select").chosen();
+			    $(".chosen-select").chosen({
+			        disable_search_threshold: 8,
+			        no_results_text: "no se encontro nadita",
+			        search_contains: "true"
+			      });
 				dataTable = $('#log-grid').DataTable( {
 					"pageLength": 50,
 					"lengthMenu": [[1,5, 10, 25, 50, 100, 500, 1000], [1,5,10, 25, 50, 100, '500 (mucho)', '1000 (demasiado)']],
