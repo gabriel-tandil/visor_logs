@@ -112,7 +112,7 @@ function format ( rowData ) {
 								+'</select>');
 						
 					}else if (i==11){
-						$(this).html( '<select class="chosen-select">' 
+						$(this).html( '<select class="chosen-select" multiple>' 
 								<?php include 'combo-operacion.php'; ?>
 								+'</select>');
 					}else if (i==12){//estado
@@ -136,7 +136,7 @@ function format ( rowData ) {
 				} );
 
 					}else if (i!=0 ){
-			        $(this).html( '<input type="text" placeholder="todos" size=10/>' );
+			        $(this).html( '<input type="text" placeholder="Todos" size=10/>' );
 			 
 			        $( 'input', this ).on( 'keyup change', function () {
 			            if ( dataTable.column(i).search() !== this.value ) {
@@ -150,8 +150,9 @@ function format ( rowData ) {
 			    } );
 			    $(".chosen-select").chosen({
 			        disable_search_threshold: 8,
-			        no_results_text: "no se encontro nadita",
-			        search_contains: "true"
+			        no_results_text: "no se encontro nadita: ",
+			        search_contains: "true",
+			        placeholder_text_multiple: "Todos"
 			      });
 				dataTable = $('#log-grid').DataTable( {
 					"pageLength": 50,

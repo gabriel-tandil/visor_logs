@@ -11,11 +11,11 @@ $sql = "SELECT distinct operancion ";
 $sql.=" FROM log_procesos";
 $query=mysqli_query($conn, $sql) or die("combo-operacion.php: obtener valores");
 
-echo '+\'<option value="">Todos</option>\'';
+//echo '+\'<option value="">Todos</option>\'';
 $data = array();
 while( $row=mysqli_fetch_array($query) ) { 
-    if ($row[0]==null)
-        echo '+\'<option value="nulo">nulo</option>\'';
+    if ($row[0]==null){}
+        //  echo '+\'<option value="nulo">nulo</option>\'';
     else
         if (strlen($row[0])<100)
          echo '+\'<option value="'.str_replace('\'', '&#39;', $row[0]).'">'.str_replace('\'', '&#39;',(strlen($row[0])>33?'...'.substr($row[0],-30):$row[0])).'</option>\'';

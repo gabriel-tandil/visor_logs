@@ -93,10 +93,7 @@ if (! empty($requestData['columns'][1]['search']['value'])
             $sql .= " AND ( metodo = '" . $requestData['columns'][10]['search']['value'] . "' ) ";
     }
     if (! empty($requestData['columns'][11]['search']['value'])) { // operancion
-        if ($requestData['columns'][11]['search']['value'] == 'nulo')
-            $sql .= " AND ( operancion is null ) ";
-        else
-            $sql .= " AND ( operancion = '" . $requestData['columns'][11]['search']['value'] . "' ) ";
+        $sql .= " AND ( operancion in ('" . str_replace(',',"','",$requestData['columns'][11]['search']['value']) . "') ) ";
     }
     if (! empty($requestData['columns'][12]['search']['value'])) { // estado
         $sql .= " AND ( estado = '" . $requestData['columns'][12]['search']['value'] . "' ) ";
