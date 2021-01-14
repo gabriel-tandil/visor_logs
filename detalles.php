@@ -13,7 +13,8 @@ $requestData = $_REQUEST;
 $sql = "SELECT dato FROM log_procesos where idLogProcesos=?";
 
 $stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, 'i', intval($requestData['idLogProcesos']));
+$idLogProcesos=intval($requestData['idLogProcesos']);
+mysqli_stmt_bind_param($stmt, 'i',$idLogProcesos );
 mysqli_stmt_execute($stmt);
 mysqli_stmt_bind_result($stmt, $dato);
 

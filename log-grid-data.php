@@ -2,7 +2,7 @@
 /* Database connection start */
 $array_ini = parse_ini_file("conf.ini", true);
 
-$conn = mysqli_connect($array_ini['bdd']['servername'], $array_ini['bdd']['username'], $array_ini['bdd']['password'], $array_ini['bdd']['dbname']) or die("Connection failed: " . mysqli_connect_error());
+$conn = mysqli_connect($array_ini['bdd']['servername'], $array_ini['bdd']['username'], $array_ini['bdd']['password'], $array_ini['bdd']['dbname']) or throwError("Connection failed: " . mysqli_connect_error());
 
 /* Database connection end */
 
@@ -101,7 +101,7 @@ if (! empty($requestData['columns'][1]['search']['value'])
 }
 $sql .= " ORDER BY " . $columns[$requestData['order'][0]['column']] . "   " . $requestData['order'][0]['dir'] . "   LIMIT " . $requestData['start'] . " ," . $requestData['length'] . "   ";
 
-$query = mysqli_query($conn, $sql) or die("employee-grid-data.php: get log_procesos");
+$query = mysqli_query($conn, $sql) or throwError("employee-grid-data.php: get log_procesos");
 
 $data = array();
 $cuenta = 0;
@@ -124,7 +124,7 @@ while ($row = mysqli_fetch_array($query)) { // preparing an array
     $data[] = $nestedData;
     $cuenta ++;
 }
-
+//var_dump($data);
 if ($cuenta == $requestData['length'])
     $falsaCantRegistros = $requestData['start'] + $requestData['length'] + 1;
 else
@@ -138,6 +138,11 @@ $json_data = array(
 );
 
 echo json_encode($json_data); // send data as json format
+
+function throwError($param) {
+    echo $param;
+    die ($param);
+}
 
 ?>
 
